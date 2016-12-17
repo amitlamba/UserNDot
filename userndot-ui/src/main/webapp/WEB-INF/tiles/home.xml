@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="@frame" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="userndotHeader" value="/WEB-INF/views/shared/header.jsp" />
+		<put-attribute name="userndotFooter" value="/WEB-INF/views/shared/footer.jsp" />
+	</definition>
+
+	<definition name="@blankFrame" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="userndotHeader" value="" />
+		<put-attribute name="userndotFooter" value="" />
+		<put-attribute name="head"
+			value="/WEB-INF/views/home/shared/head.jsp" />
+	</definition>
+
+	<definition name="@login" extends="@blankFrame">
+		<put-attribute name="title" value="Login view your account details" />
+		<put-attribute name="metaDescription" value="Meta Description" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/home/authenticate/body.jsp" />
+	</definition>
+	
+	<definition name="@dashboard" extends="@frame">
+		<put-attribute name="title" value="Login view your account details" />
+		<put-attribute name="metaDescription" value="Meta Description" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/home/dashboard.jsp" />
+	</definition>
+</tiles-definitions>

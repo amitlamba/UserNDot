@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+				http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+				http://www.springframework.org/schema/context
+				http://www.springframework.org/schema/context/spring-context-3.1.xsd
+				http://camel.apache.org/schema/spring
+				http://camel.apache.org/schema/spring/camel-spring.xsd
+				http://www.springframework.org/schema/data/mongo
+          		http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd
+          		http://www.springframework.org/schema/data/jpa
+    			http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+	<!-- Configuration Properties -->
+	<context:property-placeholder location="classpath*:userndot.properties"
+		system-properties-mode="OVERRIDE" />
+	<context:property-override
+		location="file:///${user.home}/userndotconfig/userndot_override.properties"
+		ignore-resource-not-found="false" ignore-unresolvable="true" />
+	<bean id="userndotPropertiesPlaceHolder"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>file:///${user.home}/userndotconfig/userndot_override.properties
+				</value>
+			</list>
+		</property>
+		<property name="placeholderPrefix" value="$userndot.props{" />
+	</bean>
+
+	<!-- Component Scans -->
+	<context:component-scan base-package="com.userndot.exception" />
+	<context:component-scan base-package="com.userndot.utils" />
+	<context:component-scan base-package="com.userndot.common" />
+	<context:component-scan base-package="com.userndot.configuration" />
+
+
+	<!-- Database Related Beans -->
+<!-- 	<bean id="jdbcContext" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean id="adminPanelJdbcContext" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.mysqlDriverClassName}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="initialSize" value="${jdbc.initialSize}" />
+	</bean>
+
+	<bean id="mysqlJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="mysqlDataSource" />
+	</bean>
+
+	<bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.mysqlDriverClassName}" />
+		<property name="url" value="${dataSource.url}" />
+		<property name="username" value="${dataSource.username}" />
+		<property name="password" value="${dataSource.password}" />
+	</bean>
+ -->
+	<!-- Database Related Beans (End) -->
+
+	<!-- Note: All these properties can be overridden through mettl_override.properties -->
+
+
+	<!-- Resource Bundle for Internationalization -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="locale/Language" />
+		<!-- <property name="useCodeAsDefaultMessage" value="false" /> -->
+	</bean>
+</beans>
